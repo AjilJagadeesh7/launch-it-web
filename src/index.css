@@ -107,3 +107,6 @@ body {
 .action-secondary {
   @apply bg-purple-600 text-bgText  px-5 py-2 rounded-md active:opacity-20 w-full mt-5 font-semibold;
 }
+.action-clear {
+  @apply bg-slate-700 text-bgText  px-5 py-2 rounded-md active:opacity-20 w-full mt-5 font-semibold;
+}
