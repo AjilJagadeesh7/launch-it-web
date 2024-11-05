@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { colors } from "../lib/constants";
 import useStore from "../lib/store";
+import { FaTrash } from "react-icons/fa6";
 
 function Home() {
   const { gamesList, setGamesList } = useStore();
@@ -44,7 +45,7 @@ function Home() {
             />
             <div className="dark:bg-bgDarkHighlight dark:text-bgText h-48 py-5 px-3 flex flex-col justify-between w-[260px]">
               <p className="text-lg text-center font-medium">{el.name}</p>
-              <div className="text-xs text-wrap text-center flex gap-3 mt-2 flex-wrap justify-between">
+              <div className="text-xs text-wrap text-center flex gap-3 mt-2 flex-wrap justify-start">
                 {el.genres.length
                   ? el?.genres?.map((item: string) => (
                       <div
@@ -57,18 +58,22 @@ function Home() {
               </div>
               <div className="flex gap-2 text-xs">
                 <button
-                  className="action"
-                  onClick={() => handleLaunch(el.path)}
+                  className="action-delete flex items-center gap-2"
+                  onClick={() => handleOpenLocation(el.path)}
                 >
-                  Launch
+                  <FaTrash /> <span>Remove</span>
                 </button>
+
                 <button
-                  className="action"
+                  className="action-secondary"
                   onClick={() => handleOpenLocation(el.path)}
                 >
                   Open Folder
                 </button>
               </div>
+              <button className="action" onClick={() => handleLaunch(el.path)}>
+                Launch
+              </button>
             </div>
           </div>
         ))
