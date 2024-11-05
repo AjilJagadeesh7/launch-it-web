@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { colors } from "../lib/constants";
 import useStore from "../lib/store";
 import { FaTrash } from "react-icons/fa6";
+import { BsRocketTakeoffFill } from "react-icons/bs";
+import { IoIosFolderOpen } from "react-icons/io";
 
 function Home() {
   const { gamesList, setGamesList } = useStore();
@@ -31,6 +33,17 @@ function Home() {
     return colors[randomIndex];
   };
 
+  const removeApp = (id: number) => {
+    if (!id) return;
+    const data = localStorage.getItem("myGames");
+    if (data) {
+      const parsedData = JSON.parse(data);
+      const removedList = parsedData.filter((el: any) => el.id !== id);
+      localStorage.setItem("myGames", JSON.stringify(removedList));
+      setGamesList(removedList);
+    }
+  };
+
   return (
     <div className="flex flex-wrap gap-10 p-10">
       {gamesList.length ? (
@@ -43,7 +56,7 @@ function Home() {
               height={100}
               className="aspect-video rounded-t-md"
             />
-            <div className="dark:bg-bgDarkHighlight dark:text-bgText h-48 py-5 px-3 flex flex-col justify-between w-[260px]">
+            <div className="dark:bg-bgDarkHighlight dark:text-bgText  py-5 px-3 flex flex-col justify-between w-[260px]">
               <p className="text-lg text-center font-medium">{el.name}</p>
               <div className="text-xs text-wrap text-center flex gap-3 mt-2 flex-wrap justify-start">
                 {el.genres.length
@@ -59,19 +72,23 @@ function Home() {
               <div className="flex gap-2 text-xs">
                 <button
                   className="action-delete flex items-center gap-2"
-                  onClick={() => handleOpenLocation(el.path)}
+                  onClick={() => removeApp(el.id)}
                 >
                   <FaTrash /> <span>Remove</span>
                 </button>
 
                 <button
-                  className="action-secondary"
+                  className="action-secondary flex items-center gap-2 justify-center"
                   onClick={() => handleOpenLocation(el.path)}
                 >
-                  Open Folder
+                  <IoIosFolderOpen /> Open
                 </button>
               </div>
-              <button className="action" onClick={() => handleLaunch(el.path)}>
+              <button
+                className="action flex items-center gap-2 justify-center"
+                onClick={() => handleLaunch(el.path)}
+              >
+                <BsRocketTakeoffFill />
                 Launch
               </button>
             </div>
