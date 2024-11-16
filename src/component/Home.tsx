@@ -62,7 +62,11 @@ function Home() {
             );
           }
           return (
-            <IconsHome key={index} element={el} handleLaunch={handleLaunch} />
+            <IconsHome
+              key={index}
+              element={el}
+              handleLaunch={handleOpenLocation}
+            />
           );
         })
       ) : (
