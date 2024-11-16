@@ -52,7 +52,7 @@ export const Header = ({
         </IconButton>
       ) : null}
 
-      <div className="self-center w-1/2 flex items-center gap-2">
+      <div className="self-center w-1/2 hidden md:flex items-center gap-2">
         {currentPath !== "/" ? (
           <div className="w-20">
             <button
