@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { colors } from "../lib/constants";
 import useStore from "../lib/store";
 import { FaTrash } from "react-icons/fa6";
 import { BsRocketTakeoffFill } from "react-icons/bs";
 import { IoIosFolderOpen } from "react-icons/io";
+import { toast } from "react-toastify";
 
 function Home() {
   const { gamesList, setGamesList } = useStore();
@@ -16,21 +16,24 @@ function Home() {
 
   const handleLaunch = (filePath: string) => {
     if (filePath) {
-      //@ts-ignore
-      window?.electron.launchExecutable(filePath);
+      try {
+        //@ts-ignore
+        window?.electron.launchExecutable(filePath);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
     }
   };
 
   const handleOpenLocation = (filePath: string) => {
     if (filePath) {
-      //@ts-ignore
-      window?.electron.openFileLocation(filePath);
+      try {
+        //@ts-ignore
+        window?.electron.openFileLocation(filePath);
+      } catch (error: any) {
+        toast.error("Failed to open location");
+      }
     }
-  };
-
-  const getRandomColor = (): string => {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
   };
 
   const removeApp = (id: number) => {
@@ -48,27 +51,20 @@ function Home() {
     <div className="flex flex-wrap gap-10 p-10">
       {gamesList.length ? (
         gamesList.map((el: any) => (
-          <div key={el.id} className="rounded-md shadow-md">
+          <div
+            key={el.id}
+            className="rounded-md shadow-md dark:shadow-gray-700 border-x-stone-300 border-solid py-2 px-1"
+          >
             <img
               src={el?.image}
               alt=""
               width={260}
               height={100}
-              className="aspect-video rounded-t-md"
+              className="aspect-video rounded-md"
             />
-            <div className="dark:bg-bgDarkHighlight dark:text-bgText  py-5 px-3 flex flex-col justify-between w-[260px]">
+            <div className="dark:bg-bgShadow dark:text-bgText  py-5 px-3 flex flex-col justify-between w-[260px] rounded-md mt-2">
               <p className="text-lg text-center font-medium">{el.name}</p>
-              <div className="text-xs text-wrap text-center flex gap-3 mt-2 flex-wrap justify-start">
-                {el.genres.length
-                  ? el?.genres?.map((item: string) => (
-                      <div
-                        className={`${getRandomColor()} px-3 py-1 rounded-sm`}
-                      >
-                        {item}
-                      </div>
-                    ))
-                  : null}
-              </div>
+
               <div className="flex gap-2 text-xs">
                 <button
                   className="action-delete flex items-center gap-2"
@@ -91,11 +87,22 @@ function Home() {
                 <BsRocketTakeoffFill />
                 Launch
               </button>
+              <div className="text-wrap text-center flex mt-2 gap-2 flex-wrap justify-start">
+                {el.genres.length
+                  ? el?.genres?.map((item: string) => (
+                      <div
+                        className={`dark:bg-black bg-stone-200 text-black dark:text-white px-3 py-1 text-xs font-medium rounded-sm`}
+                      >
+                        {item}
+                      </div>
+                    ))
+                  : null}
+              </div>
             </div>
           </div>
         ))
       ) : (
-        <div className="flex justify-center w-full h-full dark:text-bgText text-bgDarkText">
+        <div className="flex justify-center w-full mt-20 h-full dark:text-bgText text-bgDarkText">
           <p>Add games to be displayed here !!</p>
         </div>
       )}

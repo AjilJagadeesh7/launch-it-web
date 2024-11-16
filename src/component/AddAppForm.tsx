@@ -4,6 +4,7 @@ import moment from "moment";
 import { useState } from "react";
 import ImageView from "./ImageView";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function AddAppForm() {
   const [filePath, setFilePath] = useState<string>("");
@@ -29,6 +30,7 @@ export default function AddAppForm() {
       });
 
       localStorage.setItem("myGames", JSON.stringify(parsedGames));
+      toast.success("Game has been added succesfully");
       navigate("/");
     } else {
       //Todo
@@ -42,7 +44,9 @@ export default function AddAppForm() {
       if (path) {
         setFilePath(path);
       }
-    } catch (error) {}
+    } catch (error: any) {
+      toast.error("Unable to perform action");
+    }
   };
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -65,7 +69,8 @@ export default function AddAppForm() {
           setSearchText("");
           setIsLoading(false);
         }
-      } catch (error) {
+      } catch (error: any) {
+        toast.error(error.message);
         setIsLoading(false);
         setSearchText("");
       }

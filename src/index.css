@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -93,11 +94,11 @@ body {
 }
 
 .input {
-  @apply px-3 py-2 rounded-md shadow-sm w-full focus:outline-1 focus:outline-slate-200 focus:ring-0;
+  @apply px-3 py-2 rounded-md shadow-sm w-60 xl:w-full focus:outline-1 focus:outline-slate-200 focus:ring-0;
 }
 
 .action {
-  @apply bg-teal-600 text-bgText  px-5 py-2 rounded-md active:opacity-20 w-full mt-5 font-semibold;
+  @apply bg-white text-black  px-5 py-2 rounded-md active:opacity-20 w-full mt-5 font-semibold;
 }
 
 .action-delete {

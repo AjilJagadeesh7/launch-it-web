@@ -2,6 +2,7 @@ import { FaAlignJustify } from "react-icons/fa6";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
 import useStore from "../lib/store";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Header = ({
   windowWidth,
@@ -10,6 +11,9 @@ export const Header = ({
   windowWidth: number;
   handleDrawer: (bool: boolean) => void;
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentPath = location.pathname; // Get the current path
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { gamesList, setGamesList } = useStore();
   const search = (e: any) => {
@@ -39,7 +43,7 @@ export const Header = ({
   };
 
   return (
-    <div className="w-full dark:bg-bgDarkHighlight bg-bgPrimary dark:text-bgText text-bgDarkText flex items-center px-5 py-2 h-20">
+    <div className="w-full dark:bg-bgDarkHighlight bg-bgPrimary dark:text-bgText text-bgDarkText flex items-center px-5 py-2 h-20 border-b border-solid border-white">
       <div>
         {windowWidth < 700 ? (
           <IconButton aria-label="Menu" onClick={() => handleDrawer(true)}>
@@ -48,9 +52,22 @@ export const Header = ({
         ) : null}
       </div>
       <div className="self-center w-1/2 flex items-center gap-2">
+        {currentPath !== "/" ? (
+          <div className="w-20">
+            <button
+              className="action "
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Back
+            </button>
+          </div>
+        ) : null}
+
         <input
           type="text"
-          className="input w-full mt-5 text-bgDarkText"
+          className="input  mt-5 text-bgDarkText"
           placeholder="Search Games"
           value={searchTerm}
           onChange={(e) => {

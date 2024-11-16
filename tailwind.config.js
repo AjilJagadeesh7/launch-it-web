@@ -6,10 +6,10 @@ export default {
     extend: {
       colors: {
         bgPrimary: "#F7F8F9",
-        bgDarkPrimary: "#1D2125",
-        bgShadow: "#10232A",
+        bgDarkPrimary: "#000000",
+        bgShadow: "#181818",
         bgHighlight: "#F1F2F4",
-        bgDarkHighlight: "#22272B",
+        bgDarkHighlight: "#000000",
         bgText: "#FFFFFF",
         bgDarkText: "#101214",
         bgAction: "#B58863",

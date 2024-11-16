@@ -7,6 +7,8 @@ import useStore from "./lib/store";
 import { Alert } from "@mui/material";
 import AddApp from "./component/AddAppModal";
 import Home from "./component/Home";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function useThemeInitializer() {
   useEffect(() => {
@@ -76,6 +78,7 @@ function App() {
           ) : null}
         </div>
       </div>
+      <ToastContainer />
     </Router>
   );
 }
