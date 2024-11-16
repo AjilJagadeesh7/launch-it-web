@@ -7,7 +7,7 @@ function IconsHome({
 }) {
   return (
     <div
-      className=" border-solid dark:border-white dark:shadow-md shadow-2xl shadow-gray-600  border-black border rounded-md cursor-pointer"
+      className=" border-solid dark:border-white dark:shadow-md shadow-2xl shadow-gray-600  border-black border rounded-md cursor-pointer active:opacity-15"
       onClick={() => handleLaunch(element.path)}
     >
       <img
