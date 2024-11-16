@@ -98,7 +98,7 @@ body {
 }
 
 .action {
-  @apply bg-white text-black  px-5 py-2 rounded-md active:opacity-20 w-full mt-5 font-semibold;
+  @apply dark:bg-white dark:text-black bg-black text-white  px-5 py-2 rounded-md active:opacity-20 w-full mt-5 font-semibold;
 }
 
 .action-delete {
