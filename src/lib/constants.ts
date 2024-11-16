@@ -7,6 +7,7 @@ export const alertValues = {
 
 export interface StoreState {
   isModalOpen: boolean;
+  isIconOnly: boolean;
   showAlert: {
     show: boolean;
     severity: string;
@@ -15,6 +16,7 @@ export interface StoreState {
   setShowAlert: (bool: boolean, alertValue: string) => void;
   setIsModalOpen: (bool: boolean) => void;
   setGamesList: (newGames: any) => void;
+  setIsIconOnly: (bool: boolean) => void;
 }
 
 export const colors = [

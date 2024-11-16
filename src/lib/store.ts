@@ -3,6 +3,7 @@ import { alertValues, StoreState } from "./constants";
 
 const useStore = create<StoreState>((set) => ({
   isModalOpen: false,
+  isIconOnly: false,
   gamesList: [],
   showAlert: {
     show: false,
@@ -22,6 +23,10 @@ const useStore = create<StoreState>((set) => ({
   setGamesList: (newGames: any) =>
     set(() => ({
       gamesList: newGames,
+    })),
+  setIsIconOnly: (bool: boolean) =>
+    set(() => ({
+      isIconOnly: bool,
     })),
 }));
 
